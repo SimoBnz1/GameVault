@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GameVault | Store</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen bg-slate-900 text-slate-100">
+  <header class="sticky top-0 z-30 border-b border-slate-800 bg-slate-950/95 backdrop-blur-xl">
+    <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
+      <div>
+        <h1 class="text-2xl font-semibold">GameVault</h1>
+        <p class="text-sm text-slate-400">Digital Game Store</p>
+      </div>
+      <a href="cart.html" class="rounded-lg bg-purple-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-blue-600">Cart</a>
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-6xl px-4 py-8">
+    <section class="rounded-xl bg-slate-800 p-6 shadow-lg shadow-black/40">
+      <div class="space-y-4">
+        <h2 class="text-3xl font-bold">Find your next favorite game</h2>
+        <p class="text-slate-300">Browse top games, search by title, and filter by category. Add games to your cart in one click.</p>
+      </div>
+    </section>
+
+    <section class="mt-8 space-y-6">
+      <div class="grid gap-4 md:grid-cols-[1fr_auto]">
+        <input id="searchInput" type="text" placeholder="Search games by title..." class="w-full rounded-xl border border-slate-700 bg-slate-800 px-4 py-3 text-slate-100 outline-none transition focus:border-blue-500" />
+        <div class="flex flex-wrap gap-3">
+          <button class="category-button rounded-xl bg-purple-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-blue-600" data-genre="All">All</button>
+          <button class="category-button rounded-xl bg-slate-800 px-4 py-2 text-sm font-semibold text-slate-100 transition hover:bg-slate-700" data-genre="RPG">RPG</button>
+          <button class="category-button rounded-xl bg-slate-800 px-4 py-2 text-sm font-semibold text-slate-100 transition hover:bg-slate-700" data-genre="Action">Action</button>
+          <button class="category-button rounded-xl bg-slate-800 px-4 py-2 text-sm font-semibold text-slate-100 transition hover:bg-slate-700" data-genre="FPS">FPS</button>
+          <button class="category-button rounded-xl bg-slate-800 px-4 py-2 text-sm font-semibold text-slate-100 transition hover:bg-slate-700" data-genre="Sport">Sport</button>
+        </div>
+      </div>
+      <div id="gameGrid" class="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-4"></div>
+    </section>
+  </main>
+
+  <footer class="border-t border-slate-800 bg-slate-950/90 px-4 py-6 text-center text-sm text-slate-500">
+    GameVault• Simple Tailwind game store
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
