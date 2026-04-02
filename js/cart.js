@@ -30,9 +30,15 @@ function displayCart() {
     let card = document.createElement('div');
     card.innerHTML = '<h3>' + game.title + '</h3>' +
                      '<p>Prix: $' + game.price + '</p>' +
-                     '<p>Quantité: ' + item.quantity + '</p>';
+                     '<p>Quantité: ' + item.quantity + '</p>' +
+                     '<button onclick="changeQty(' + item.id + ', -1)">-</button>' +
+                     '<button onclick="changeQty(' + item.id + ', 1)">+</button>';
     container.appendChild(card);
   }
+}
+
+function changeQty(id, value) {
+  // Mise à jour de la quantité
 }
 
 document.addEventListener('DOMContentLoaded', setupCart);
