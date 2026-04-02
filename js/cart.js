@@ -9,6 +9,7 @@ function displayCart() {
 
   if (cart.length === 0) {
     container.innerHTML = '<p>Panier vide</p>';
+    document.getElementById('cartTotal').innerText = '$0.00';
     return;
   }
 
@@ -36,6 +37,8 @@ function displayCart() {
                      '<button onclick="removeItem(' + item.id + ')">Supprimer</button>';
     container.appendChild(card);
   }
+
+  updateTotal();
 }
 
 function changeQty(id, value) {
@@ -69,6 +72,33 @@ function removeItem(id) {
   }
 
   saveCart(newCart);
+  displayCart();
+}
+
+function updateTotal() {
+  let cart = getCart();
+  let total = 0;
+
+  for (let i = 0; i < cart.length; i++) {
+    let item = cart[i];
+    let game = null;
+
+    for (let j = 0; j < games.length; j++) {
+      if (games[j].id === item.id) {
+        game = games[j];
+        break;
+      }
+    }
+
+    if (game) {
+      total += game.price * item.quantity;
+    }
+  }
+
+  document.getElementById('cartTotal').innerText = '$' + total.toFixed(2);
+}
+
+function setupCart() {
   displayCart();
 }
 
