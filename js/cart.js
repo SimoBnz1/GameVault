@@ -38,7 +38,23 @@ function displayCart() {
 }
 
 function changeQty(id, value) {
-  // Mise à jour de la quantité
+  let cart = getCart();
+
+  for (let i = 0; i < cart.length; i++) {
+    if (cart[i].id === id) {
+      cart[i].quantity += value;
+
+      if (cart[i].quantity <= 0) {
+        removeItem(id);
+        return;
+      }
+
+      break;
+    }
+  }
+
+  saveCart(cart);
+  displayCart();
 }
 
 document.addEventListener('DOMContentLoaded', setupCart);
