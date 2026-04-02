@@ -1,5 +1,9 @@
 let selectedCategory = 'All';
 
+function formatPrice(value) {
+  return '$' + value.toFixed(2);
+}
+
 // Affiche une liste de jeux dans la grille principale
 function displayGames(list) {
   let grid = document.getElementById('gameGrid');
@@ -10,7 +14,7 @@ function displayGames(list) {
     let card = document.createElement('div');
     card.innerHTML = '<div><strong>' + game.title + '</strong></div>' +
                      '<div>' + game.category + '</div>' +
-                     '<div>$' + game.price.toFixed(2) + '</div>' +
+                     '<div>' + formatPrice(game.price) + '</div>' +
                      '<button onclick="addToCart(' + game.id + ')">Ajouter au panier</button>';
     grid.appendChild(card);
   }

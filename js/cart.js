@@ -4,6 +4,10 @@ function setupCart() {
   document.getElementById('orderButton').addEventListener('click', order);
 }
 
+function formatPrice(value) {
+  return '$' + value.toFixed(2);
+}
+
 // Affiche le contenu du panier
 function displayCart() {
   let cart = getCart();
@@ -33,9 +37,9 @@ function displayCart() {
 
     let card = document.createElement('div');
     card.innerHTML = '<h3>' + game.title + '</h3>' +
-                     '<p>Prix unitaire: $' + game.price.toFixed(2) + '</p>' +
+                     '<p>Prix unitaire: ' + formatPrice(game.price) + '</p>' +
                      '<p>Quantité: ' + item.quantity + '</p>' +
-                     '<p>Sous-total: $' + (game.price * item.quantity).toFixed(2) + '</p>' +
+                     '<p>Sous-total: ' + formatPrice(game.price * item.quantity) + '</p>' +
                      '<button onclick="changeQty(' + item.id + ', -1)">-</button>' +
                      '<button onclick="changeQty(' + item.id + ', 1)">+</button>' +
                      '<button onclick="removeItem(' + item.id + ')">Supprimer</button>';
@@ -102,7 +106,7 @@ function updateTotal() {
     }
   }
 
-  document.getElementById('cartTotal').innerText = '$' + total.toFixed(2);
+  document.getElementById('cartTotal').innerText = formatPrice(total);
 }
 
 // Finalise la commande et vide le panier
