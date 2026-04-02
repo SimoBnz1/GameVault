@@ -14,9 +14,23 @@ function displayCart() {
 
   for (let i = 0; i < cart.length; i++) {
     let item = cart[i];
+    let game = null;
+
+    for (let j = 0; j < games.length; j++) {
+      if (games[j].id === item.id) {
+        game = games[j];
+        break;
+      }
+    }
+
+    if (!game) {
+      continue;
+    }
+
     let card = document.createElement('div');
-    card.innerHTML = '<div>' + item.id + '</div>' +
-                     '<div>Quantité: ' + item.quantity + '</div>';
+    card.innerHTML = '<h3>' + game.title + '</h3>' +
+                     '<p>Prix: $' + game.price + '</p>' +
+                     '<p>Quantité: ' + item.quantity + '</p>';
     container.appendChild(card);
   }
 }
