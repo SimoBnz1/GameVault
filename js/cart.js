@@ -32,7 +32,8 @@ function displayCart() {
                      '<p>Prix: $' + game.price + '</p>' +
                      '<p>Quantité: ' + item.quantity + '</p>' +
                      '<button onclick="changeQty(' + item.id + ', -1)">-</button>' +
-                     '<button onclick="changeQty(' + item.id + ', 1)">+</button>';
+                     '<button onclick="changeQty(' + item.id + ', 1)">+</button>' +
+                     '<button onclick="removeItem(' + item.id + ')">Supprimer</button>';
     container.appendChild(card);
   }
 }
@@ -54,6 +55,20 @@ function changeQty(id, value) {
   }
 
   saveCart(cart);
+  displayCart();
+}
+
+function removeItem(id) {
+  let cart = getCart();
+  let newCart = [];
+
+  for (let i = 0; i < cart.length; i++) {
+    if (cart[i].id !== id) {
+      newCart.push(cart[i]);
+    }
+  }
+
+  saveCart(newCart);
   displayCart();
 }
 
