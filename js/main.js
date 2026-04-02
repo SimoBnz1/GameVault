@@ -7,7 +7,9 @@ function displayGames(list) {
   for (let i = 0; i < list.length; i++) {
     let game = list[i];
     let card = document.createElement('div');
-    card.innerHTML = '<div>' + game.title + '</div>' +
+    card.innerHTML = '<div><strong>' + game.title + '</strong></div>' +
+                     '<div>' + game.category + '</div>' +
+                     '<div>$' + game.price.toFixed(2) + '</div>' +
                      '<button onclick="addToCart(' + game.id + ')">Ajouter au panier</button>';
     grid.appendChild(card);
   }
