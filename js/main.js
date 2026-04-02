@@ -13,7 +13,7 @@ function displayGames(list) {
 }
 
 function setup() {
-  // Initialisation du store
+  displayGames(games);
 }
 
 document.addEventListener('DOMContentLoaded', setup);
