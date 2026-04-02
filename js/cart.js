@@ -1,5 +1,6 @@
 function setupCart() {
   displayCart();
+  document.getElementById('orderButton').addEventListener('click', order);
 }
 
 function displayCart() {
@@ -98,8 +99,10 @@ function updateTotal() {
   document.getElementById('cartTotal').innerText = '$' + total.toFixed(2);
 }
 
-function setupCart() {
+function order() {
+  saveCart([]);
   displayCart();
+  alert('Commande réussie');
 }
 
 document.addEventListener('DOMContentLoaded', setupCart);
