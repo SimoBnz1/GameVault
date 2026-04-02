@@ -56,6 +56,13 @@ function setup() {
   let buttons = document.querySelectorAll('.category-button');
   for (let i = 0; i < buttons.length; i++) {
     buttons[i].addEventListener('click', function () {
+      for (let j = 0; j < buttons.length; j++) {
+        buttons[j].classList.remove('bg-emerald-500');
+        buttons[j].classList.add('bg-white');
+      }
+      this.classList.remove('bg-white');
+      this.classList.add('bg-emerald-500');
+
       selectedCategory = this.dataset.genre;
       filterGames();
     });
