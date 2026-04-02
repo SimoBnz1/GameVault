@@ -31,8 +31,9 @@ function displayCart() {
 
     let card = document.createElement('div');
     card.innerHTML = '<h3>' + game.title + '</h3>' +
-                     '<p>Prix: $' + game.price + '</p>' +
+                     '<p>Prix unitaire: $' + game.price.toFixed(2) + '</p>' +
                      '<p>Quantité: ' + item.quantity + '</p>' +
+                     '<p>Sous-total: $' + (game.price * item.quantity).toFixed(2) + '</p>' +
                      '<button onclick="changeQty(' + item.id + ', -1)">-</button>' +
                      '<button onclick="changeQty(' + item.id + ', 1)">+</button>' +
                      '<button onclick="removeItem(' + item.id + ')">Supprimer</button>';
