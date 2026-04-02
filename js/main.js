@@ -14,7 +14,22 @@ function displayGames(list) {
 }
 
 function addToCart(id) {
-  // Logique d'ajout au panier
+  let cart = getCart();
+  let found = false;
+
+  for (let i = 0; i < cart.length; i++) {
+    if (cart[i].id === id) {
+      cart[i].quantity++;
+      found = true;
+      break;
+    }
+  }
+
+  if (!found) {
+    cart.push({ id: id, quantity: 1 });
+  }
+
+  saveCart(cart);
 }
 
 function setup() {
