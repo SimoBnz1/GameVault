@@ -49,6 +49,14 @@ function filterGames() {
 function setup() {
   displayGames(games);
   document.getElementById('searchInput').addEventListener('input', filterGames);
+
+  let buttons = document.querySelectorAll('.category-button');
+  for (let i = 0; i < buttons.length; i++) {
+    buttons[i].addEventListener('click', function () {
+      selectedCategory = this.dataset.genre;
+      filterGames();
+    });
+  }
 }
 
 document.addEventListener('DOMContentLoaded', setup);
