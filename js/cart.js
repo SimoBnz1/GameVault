@@ -1,8 +1,10 @@
+// Initialise la page du panier
 function setupCart() {
   displayCart();
   document.getElementById('orderButton').addEventListener('click', order);
 }
 
+// Affiche le contenu du panier
 function displayCart() {
   let cart = getCart();
   let container = document.getElementById('cartItems');
@@ -43,6 +45,7 @@ function displayCart() {
   updateTotal();
 }
 
+// Change la quantité d'une ligne du panier
 function changeQty(id, value) {
   let cart = getCart();
 
@@ -63,6 +66,7 @@ function changeQty(id, value) {
   displayCart();
 }
 
+// Supprime un élément du panier
 function removeItem(id) {
   let cart = getCart();
   let newCart = [];
@@ -77,6 +81,7 @@ function removeItem(id) {
   displayCart();
 }
 
+// Calcule le total du panier
 function updateTotal() {
   let cart = getCart();
   let total = 0;
@@ -100,6 +105,7 @@ function updateTotal() {
   document.getElementById('cartTotal').innerText = '$' + total.toFixed(2);
 }
 
+// Finalise la commande et vide le panier
 function order() {
   saveCart([]);
   displayCart();

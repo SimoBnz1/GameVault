@@ -1,5 +1,6 @@
 let selectedCategory = 'All';
 
+// Affiche une liste de jeux dans la grille principale
 function displayGames(list) {
   let grid = document.getElementById('gameGrid');
   grid.innerHTML = '';
@@ -15,6 +16,7 @@ function displayGames(list) {
   }
 }
 
+// Ajoute un jeu au panier et sauvegarde dans localStorage
 function addToCart(id) {
   let cart = getCart();
   let found = false;
@@ -34,6 +36,7 @@ function addToCart(id) {
   saveCart(cart);
 }
 
+// Filtre les jeux selon le texte et la catégorie sélectionnée
 function filterGames() {
   let text = document.getElementById('searchInput').value.toLowerCase();
   let result = [];
