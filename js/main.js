@@ -38,7 +38,10 @@ function filterGames() {
 
   for (let i = 0; i < games.length; i++) {
     let game = games[i];
-    if (game.title.toLowerCase().includes(text)) {
+    let titleMatch = game.title.toLowerCase().includes(text);
+    let categoryMatch = selectedCategory === 'All' || game.category === selectedCategory;
+
+    if (titleMatch && categoryMatch) {
       result.push(game);
     }
   }
