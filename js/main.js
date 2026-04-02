@@ -32,8 +32,23 @@ function addToCart(id) {
   saveCart(cart);
 }
 
+function filterGames() {
+  let text = document.getElementById('searchInput').value.toLowerCase();
+  let result = [];
+
+  for (let i = 0; i < games.length; i++) {
+    let game = games[i];
+    if (game.title.toLowerCase().includes(text)) {
+      result.push(game);
+    }
+  }
+
+  displayGames(result);
+}
+
 function setup() {
   displayGames(games);
+  document.getElementById('searchInput').addEventListener('input', filterGames);
 }
 
 document.addEventListener('DOMContentLoaded', setup);
