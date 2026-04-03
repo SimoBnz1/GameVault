@@ -36,3 +36,23 @@ function displayGames(list) {
     grid.appendChild(card);
   }
 }
+
+function addToCart(id) {
+  let cart = getCart();
+  let found = false;
+
+  for (let i = 0; i < cart.length; i++) {
+    if (cart[i].id === id) {
+      cart[i].quantity++;
+      found = true;
+      break;
+    }
+  }
+
+  if (!found) {
+    cart.push({ id: id, quantity: 1 });
+  }
+
+  saveCart(cart);
+  alert("Jeu ajouté au panier");
+}
