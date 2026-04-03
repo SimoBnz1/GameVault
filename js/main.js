@@ -56,3 +56,46 @@ function addToCart(id) {
   saveCart(cart);
   alert("Jeu ajouté au panier");
 }
+
+function filterGames() {
+  let searchText = document.getElementById("searchInput").value.toLowerCase();
+  let filtered = [];
+
+  for (let i = 0; i < games.length; i++) {
+    let game = games[i];
+    let titleMatch = game.title.toLowerCase().includes(searchText);
+    let categoryMatch =
+      selectedCategory === "All" || game.category === selectedCategory;
+
+    if (titleMatch && categoryMatch) {
+      filtered.push(game);
+    }
+  }
+
+  displayGames(filtered);
+}
+function setup() {
+  displayGames(games);
+
+  document.getElementById("searchInput").addEventListener("input", filterGames);
+
+  const categoryButtons = document.querySelectorAll(".category-button");
+
+  categoryButtons.forEach(button => {
+    button.addEventListener("click", () => {
+      
+      categoryButtons.forEach(btn => {
+        btn.classList.remove("bg-purple-600");
+        btn.classList.add("slate-800");
+      });
+
+      
+      button.classList.remove("bg-slate-800");
+      button.classList.add("bg-purple-600");
+      selectedCategory = button.dataset.genre;
+      filterGames();
+    });
+  });
+}
+
+document.addEventListener("DOMContentLoaded", setup);
