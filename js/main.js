@@ -77,6 +77,25 @@ function filterGames() {
 function setup() {
   displayGames(games);
 
+  document.getElementById("searchInput").addEventListener("input", filterGames);
+
+  const categoryButtons = document.querySelectorAll(".category-button");
+
+  categoryButtons.forEach(button => {
+    button.addEventListener("click", () => {
+      
+      categoryButtons.forEach(btn => {
+        btn.classList.remove("bg-purple-600");
+        btn.classList.add("slate-800");
+      });
+
+      
+      button.classList.remove("bg-slate-800");
+      button.classList.add("bg-purple-600");
+      selectedCategory = button.dataset.genre;
+      filterGames();
+    });
+  });
 }
 
 document.addEventListener("DOMContentLoaded", setup);
