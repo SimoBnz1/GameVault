@@ -74,3 +74,9 @@ function filterGames() {
 
   displayGames(filtered);
 }
+function setup() {
+  displayGames(games);
+
+}
+
+document.addEventListener("DOMContentLoaded", setup);
