@@ -28,7 +28,7 @@ function displayGames(list) {
       '<p class="mt-2 text-blue-600 font-bold">' +
       formatPrice(game.price) +
       "</p>" +
-      '<button class="mt-3 w-full rounded-lg bg-emerald-500 px-4 py-2 text-sm font-semibold text-white hover:bg-teal-500" onclick="addToCart(' +
+      '<button class="mt-3 w-full rounded-lg bg-purple-500 px-4 py-2 text-sm font-semibold text-white hover:bg-teal-500" onclick="addToCart(' +
       game.id +
       ')">Ajouter au panier</button>' +
       "</div>";
@@ -83,17 +83,15 @@ function setup() {
 
   categoryButtons.forEach(button => {
     button.addEventListener("click", () => {
-      // 7iyd class mn kul buttons
+      
       categoryButtons.forEach(btn => {
-        btn.classList.remove("bg-emerald-500");
+        btn.classList.remove("bg-purple-600");
         btn.classList.add("slate-800");
       });
 
-      // zid class l button li dar click
+      
       button.classList.remove("bg-slate-800");
-      button.classList.add("bg-emerald-500");
-
-      // update category w filter
+      button.classList.add("bg-purple-600");
       selectedCategory = button.dataset.genre;
       filterGames();
     });
