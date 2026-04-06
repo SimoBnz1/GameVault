@@ -54,12 +54,12 @@ function addToCart(id) {
 
     if (!found) {
         cart.push({ id: id, quantity: 1 });
-        
-    }
 
+    }
+    
     saveCart(cart);
-    const countCart=document.getElementById("cardcount");
-    countCart.innerText=cart.length;
+    const countCart = document.getElementById("cardcount");
+    countCart.innerText = cart.length;
 
 }
 
@@ -81,28 +81,38 @@ function filterGames() {
     }
 
     displayGames(filtered);
+   
 }
 
+
 function setup() {
+    let promo =document.getElementById('promo');
+     let count=30;
+    promo.innerText=count;
+   
+    for (let i = 0; i <= 30; i--) {
+        if(i===0){
+            promo.innerText=""
+        }
+        count--
+    }
     displayGames(games);
     const cart = getCart()
-    const countCart=document.getElementById("cardcount");
-    countCart.innerText=cart.length;
+    const countCart = document.getElementById("cardcount");
+    countCart.innerText = cart.length;
 
-    document.getElementById("searchInput").addEventListener("input" , ()=> filterGames());
+    document.getElementById("searchInput").addEventListener("input", () => filterGames());
 
     const categoryButtons = document.querySelectorAll(".category-button");
 
     categoryButtons.forEach(button => {
         button.addEventListener("click", () => {
-
-        
-            categoryButtons.forEach(btn => {
+          categoryButtons.forEach(btn => {
                 btn.classList.remove("bg-purple-600");
                 btn.classList.add("bg-slate-800");
             });
 
-     
+
             button.classList.remove("bg-slate-800");
             button.classList.add("bg-purple-600");
 
@@ -111,6 +121,7 @@ function setup() {
             filterGames();
         });
     });
+
 }
 
 document.addEventListener("DOMContentLoaded", setup);

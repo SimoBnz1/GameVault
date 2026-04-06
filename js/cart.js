@@ -18,10 +18,10 @@ function findGameById(id) {
   return null;
 }
 
+
+
 function displayCart() {
   let cart = getCart();
-  console.log(cart);
-  
   let container = document.getElementById("cartItems");
 
   container.innerHTML = "";
@@ -37,9 +37,6 @@ function displayCart() {
   for (let i = 0; i < cart.length; i++) {
     let item = cart[i];
     let game = findGameById(item.id);
-
- 
-
     let card = document.createElement("div");
 
     card.className =
