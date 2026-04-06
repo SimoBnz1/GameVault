@@ -1,15 +1,14 @@
-// Start cart page
+
 function setupCart() {
   displayCart();
   document.getElementById("orderButton").addEventListener("click",()=>order() );
 }
 
-// Format price ($10.00)
 function formatPrice(value) {
   return "$" + value.toFixed(2);
 }
 
-// Find game by id
+
 function findGameById(id) {
   for (let i = 0; i < games.length; i++) {
     if (games[i].id === id) {
@@ -19,7 +18,6 @@ function findGameById(id) {
   return null;
 }
 
-// Display cart items
 function displayCart() {
   let cart = getCart();
   console.log(cart);
@@ -28,7 +26,6 @@ function displayCart() {
 
   container.innerHTML = "";
 
-  // If cart is empty
   if (cart.length === 0) {
     container.innerHTML =
       '<p class="text-slate-400">Votre panier est vide.</p>';
@@ -37,7 +34,6 @@ function displayCart() {
     return;
   }
 
-  // Loop items
   for (let i = 0; i < cart.length; i++) {
     let item = cart[i];
     let game = findGameById(item.id);
@@ -83,7 +79,6 @@ function displayCart() {
   updateCartTotal();
 }
 
-// Change quantity
 function changeQty(id, amount) {
   let cart = getCart();
 
@@ -102,7 +97,6 @@ function changeQty(id, amount) {
   displayCart();
 }
 
-// Remove item
 function removeItem(id) {
   let cart = getCart();
   let newCart = [];
@@ -117,7 +111,7 @@ function removeItem(id) {
   displayCart();
 }
 
-// Update total price
+
 function updateCartTotal() {
   let cart = getCart();
   let total = calculateTotal(cart);
@@ -126,11 +120,9 @@ function updateCartTotal() {
     formatPrice(total);
 }
 
-// Order button
 function order() {
   saveCart([]);
   displayCart();
 }
 
-// Run when page loads
 document.addEventListener("DOMContentLoaded", setupCart);
