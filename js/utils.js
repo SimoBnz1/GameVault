@@ -1,3 +1,4 @@
+
 function getCart() {
   let data = localStorage.getItem("cart");
 
@@ -27,3 +28,4 @@ function calculateTotal(cart) {
 
   return total;
 }
+

@@ -1,76 +1,108 @@
-// Initialise la page du panier
+// Start cart page
 function setupCart() {
   displayCart();
-  document.getElementById('orderButton').addEventListener('click', order);
+  document.getElementById("orderButton").addEventListener("click",()=>order() );
 }
 
+// Format price ($10.00)
 function formatPrice(value) {
-  return '$' + value.toFixed(2);
+  return "$" + value.toFixed(2);
 }
 
-// Affiche le contenu du panier
+// Find game by id
+function findGameById(id) {
+  for (let i = 0; i < games.length; i++) {
+    if (games[i].id === id) {
+      return games[i];
+    }
+  }
+  return null;
+}
+
+// Display cart items
 function displayCart() {
   let cart = getCart();
-  let container = document.getElementById('cartItems');
-  container.innerHTML = '';
+  console.log(cart);
+  
+  let container = document.getElementById("cartItems");
 
+  container.innerHTML = "";
+
+  // If cart is empty
   if (cart.length === 0) {
-    container.innerHTML = '<p>Panier vide</p>';
-    document.getElementById('cartTotal').innerText = '$0.00';
+    container.innerHTML =
+      '<p class="text-slate-400">Votre panier est vide.</p>';
+
+    document.getElementById("cartTotal").innerText = "$0.00";
     return;
   }
 
+  // Loop items
   for (let i = 0; i < cart.length; i++) {
     let item = cart[i];
-    let game = null;
+    let game = findGameById(item.id);
 
-    for (let j = 0; j < games.length; j++) {
-      if (games[j].id === item.id) {
-        game = games[j];
-        break;
-      }
-    }
+ 
 
-    if (!game) {
-      continue;
-    }
+    let card = document.createElement("div");
 
-    let card = document.createElement('div');
-    card.innerHTML = '<h3>' + game.title + '</h3>' +
-                     '<p>Prix unitaire: ' + formatPrice(game.price) + '</p>' +
-                     '<p>Quantité: ' + item.quantity + '</p>' +
-                     '<p>Sous-total: ' + formatPrice(game.price * item.quantity) + '</p>' +
-                     '<button onclick="changeQty(' + item.id + ', -1)">-</button>' +
-                     '<button onclick="changeQty(' + item.id + ', 1)">+</button>' +
-                     '<button onclick="removeItem(' + item.id + ')">Supprimer</button>';
+    card.className =
+      "grid gap-4 rounded-xl bg-slate-800 border border-slate-200 p-4 shadow-sm sm:grid-cols-[120px_1fr_auto]";
+
+    card.innerHTML = `
+      <img class="h-32 w-full rounded-lg object-cover" src="${game.image}" alt="${game.title}" />
+
+      <div>
+        <h3 class="text-lg font-semibold text-white">${game.title}</h3>
+        <p class="text-sm text-slate-500">${game.category}</p>
+        <p class="mt-2 text-sm text-slate-500">
+          Prix: ${formatPrice(game.price)}
+        </p>
+      </div>
+
+      <div class="flex flex-col items-end justify-between gap-3 sm:items-start sm:justify-center">
+        
+        <div class="flex items-center gap-2">
+          <button onclick="changeQty(${item.id}, -1)">-</button>
+
+          <span class="text-white">${item.quantity}</span>
+
+          <button onclick="changeQty(${item.id}, 1)">+</button>
+        </div>
+
+        <button onclick="removeItem(${item.id})">
+          Supprimer
+        </button>
+
+      </div>
+    `;
+
     container.appendChild(card);
   }
 
-  updateTotal();
+  updateCartTotal();
 }
 
-// Change la quantité d'une ligne du panier
-function changeQty(id, value) {
+// Change quantity
+function changeQty(id, amount) {
   let cart = getCart();
 
   for (let i = 0; i < cart.length; i++) {
     if (cart[i].id === id) {
-      cart[i].quantity += value;
+      cart[i].quantity += amount;
 
-      if (cart[i].quantity <= 0) {
+      if (cart[i].quantity < 1) {
         removeItem(id);
         return;
       }
-
       break;
     }
   }
-
   saveCart(cart);
   displayCart();
 }
 
-// Supprime un élément du panier
+// Remove item
 function removeItem(id) {
   let cart = getCart();
   let newCart = [];
@@ -85,35 +117,20 @@ function removeItem(id) {
   displayCart();
 }
 
-// Calcule le total du panier
-function updateTotal() {
+// Update total price
+function updateCartTotal() {
   let cart = getCart();
-  let total = 0;
+  let total = calculateTotal(cart);
 
-  for (let i = 0; i < cart.length; i++) {
-    let item = cart[i];
-    let game = null;
-
-    for (let j = 0; j < games.length; j++) {
-      if (games[j].id === item.id) {
-        game = games[j];
-        break;
-      }
-    }
-
-    if (game) {
-      total += game.price * item.quantity;
-    }
-  }
-
-  document.getElementById('cartTotal').innerText = formatPrice(total);
+  document.getElementById("cartTotal").innerText =
+    formatPrice(total);
 }
 
-// Finalise la commande et vide le panier
+// Order button
 function order() {
   saveCart([]);
   displayCart();
-  alert('Commande réussie');
 }
 
-document.addEventListener('DOMContentLoaded', setupCart);
+// Run when page loads
+document.addEventListener("DOMContentLoaded", setupCart);
